@@ -1,16 +1,15 @@
-import { useState } from "react";
-
 import "./CourseGoalItem.css";
 
-const CourseGoalItem = () => {
-	const [deleteText, setDeleteText] = useState("");
+const CourseGoalItem = (props) => {
+	// const [deleteText, setDeleteText] = useState("");
 
 	const handleDeleteGoal = () => {
-		setDeleteText("Deleted");
+		// setDeleteText("Deleted");
+		props.onDelete(props.id);
 	};
 	return (
 		<li className='goal-item' onClick={handleDeleteGoal}>
-			{deleteText}
+			{props.children}
 		</li>
 	);
 };

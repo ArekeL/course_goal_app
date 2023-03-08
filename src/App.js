@@ -1,15 +1,23 @@
 import { useState } from "react";
+
 import CourseGoalList from "./components/CourseGoals/CourseGoalList/CourseGoalList";
+import CoursInput from "./components/CourseGoals/CourseInput/CourseInput";
 
 import "./App.css";
 
-import CoursInput from "./components/CourseGoals/CourseInput/CourseInput";
-
-function App(props) {
+function App() {
 	const [courseGoals, setCourseGoals] = useState([
 		{ text: "Do all exercises!", id: "g1" },
 		{ text: "Finish the course!", id: "g2" },
 	]);
+
+	const handleAddGoal = (entredText) => {
+		setCourseGoals((preveGaols) => {
+			const updatedGoals = [...preveGaols];
+			updatedGoals.unshift({ text: entredText, id: Math.random().toString() });
+			return updatedGoals;
+		});
+	};
 
 	const handleDeleteGoal = (goalId) => {
 		setCourseGoals((preveGaols) => {
@@ -30,7 +38,7 @@ function App(props) {
 	return (
 		<div>
 			<section id='goal-form'>
-				<CoursInput />
+				<CoursInput onAddGoal={handleAddGoal} />
 			</section>
 			<section id='goals'>{content}</section>
 		</div>
